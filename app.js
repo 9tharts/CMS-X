@@ -6,19 +6,16 @@
  * @LastEditTime: 2019-06-10
  */
 
+const logger = require('koa-logger')
 const Koa = require('koa')
-const Router = require('koa-router')
+const router = require('./router')
 const config = require('./config/config')
 
-/**
- *  Init koa and router
- */
 const app = new Koa()
-const router = new Router()
 
-router.get('/', async ctx => {
-  ctx.body = 'Hello'
-})
+app.use(logger((str, args) => {
+  console.log(`Logger: ${str}`)
+}))
 
 app.use(router.routes()).use(router.allowedMethods())
 const port = process.env.PORT || config.port
