@@ -7,6 +7,7 @@
  */
 const Router = require('koa-router')
 const router = new Router()
+const fs = require('fs')
 
 /**
  * 路由结构说明
@@ -19,15 +20,22 @@ const router = new Router()
  * DELETE 删除 http://xx.com/article/1 删除对应结构为 article 下 id 为 1 的文章
  */
 
+router.get('/dashboard', async ctx => {
+  const html = await fs.readFileSync('./dashboard/dist/index.html')
+  console.log(html)
+  ctx.response.type = 'text/html'
+  ctx.body = html
+})
+
 router.all('/api/:module/:id', async ctx => {
   const params = ctx.params
   const method = ctx.method
   const query = ctx.query
-  
+
   console.log(`${method}, Module: ${params.module}, Id: ${params.id}`)
   console.log(query)
   // console.log(ctx)
-  
+
   ctx.body = `${method}, Module: ${params.module}, Id: ${params.id}`
 })
 
