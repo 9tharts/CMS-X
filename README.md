@@ -3,15 +3,21 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-10
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-10
+ * @LastEditTime: 2019-06-11
  -->
 # CMS-X
 A Headless CMS
 
- ### 起步 ###
+ ### 安装 ###
  `npm i` 安装依赖 
  
  `npm start` 运行项目
+
+### 使用 ###
+控制台静态页面部分已经默认构建，在 `dashboard/dist` 目录下，`dashboard` 目录是控制台前端部分开发目录。 
+
+访问 `http://localhost:5000` 即可进行操作。
+
 
  ### 路由结构说明 ###
  * URL 由三层结构组成 域名+模型+id，用 Http 方法来区分操作
