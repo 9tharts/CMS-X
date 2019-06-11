@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-10
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-10
+ * @LastEditTime: 2019-06-11
  */
 const Router = require('koa-router')
 const router = new Router()
@@ -19,7 +19,7 @@ const router = new Router()
  * DELETE 删除 http://xx.com/article/1 删除对应结构为 article 下 id 为 1 的文章
  */
 
-router.all('/:module/:id', async ctx => {
+router.all('/api/:module/:id', async ctx => {
   const params = ctx.params
   const method = ctx.method
   const query = ctx.query
