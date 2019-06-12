@@ -3,12 +3,13 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-10
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-12
+ * @LastEditTime: 2019-06-13
  */
 
 const Router = require('koa-router')
 const router = new Router()
 const fs = require('fs')
+const model = require('./model')
 
 /**
  * Dashboard 控制中心静态页面路由
@@ -65,8 +66,54 @@ router.get('/dashboard', async ctx => {
  */
 
 router.get('api/admin/module', async ctx => {
+  const result = await model.find('name', '')
+  ctx.body = result
+})
+
+router.get('api/admin/module/:moduleName', ctx => {
 
 })
+
+/**
+ * 
+ * 
+ * 模型操作
+ * 
+ * 
+ * GET /module 获取所有模型列表 [{id: 1, name: 'module1', des: 'description'}]
+ * POST /module 创建一个模型 {name: '', des: ''}
+ * 
+ * GET /module/:moduleName|:moduleId 通过模型name获取模型结构
+ * 
+ * PUT /module/:moduleId|:moduleName 更新模型全部信息 {id: 1, name: 'module1', des: 'description'} 
+ * PATCH /module/:moduleId|moduleName 更新模型部分信息 {id: 1, des: 'description'}
+ * 
+ * DELETE /module/:moduleId:moduleName?id|name='' 删除模型
+ * 
+ * 
+ * 模型列操作
+ * 
+ * GET  /module/:moduleName/column 获取列信息结构
+ * GET  /module/:moduleName/column?filed=type 获取列信息结构
+ * POST /module/:moduleName/column {type: 'string', name: '', des: '', defaultValue: ''} 创建列
+ * PUT  /module/:moduleName/column {type: 'string', name: '', des: '', defaultValue: ''} 全部更新列结构
+ * PATCH /module/:moduleName/column {type: 'text'} 部分更新列结构
+ * DELETE /module/:moduleName/column?filed=field1,filed2  删除列中的指定结构
+ * 
+ * 
+ * 数据操作、行操作
+ * GET /module/:moduleName/row 获取所有行
+ * GET /module/:moduleName/row?where={} 条件查询行
+ * POST  /module/:moduleName/row {} 新建行
+ * PUT /module/:moduleName/row {} 更新行全部内容
+ * PATCH /module/:moduleName/row {} 部分更新行内容
+ * DELETE /module/:moduleName/row?ids=1,2,3
+ * 
+ * 
+ * /apiv1/module/:moduleName/row?ids=1  -> 3000
+ * /apiv2/module/:moduleName/row?ids=1  -> 3001
+ * 
+ */
 
 /**
  * @api {POST} /api/admin/module
