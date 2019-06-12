@@ -25,10 +25,18 @@
                 :label="item.label"
                 :value="item.value"
               ></el-option>
+              <el-option>
+                <a href="#">创建应用</a>
+              </el-option>
             </el-select>
           </span>
           <!-- </div>
           <div style="margin-left:auto">-->
+          <a
+            href="#"
+            style="font-size:14px; text-decoration:none; color:#606266; display:inline-block; margin-left:30px; margin-right:10px;"
+          >文档中心</a>
+
           <el-dropdown style="padding: 0 20px">
             <span class="el-dropdown-link">
               Admin

@@ -69,17 +69,8 @@
           <el-form-item label="模型标识" size="small">
             <el-input placeholder="英文开头+英文、数字" v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="备注名称" size="small">
-            <el-input placeholder="显示该字段的备注名称" v-model="form.name"></el-input>
-          </el-form-item>
-          <el-divider>高级设置</el-divider>
-          <el-form-item label="权限" size="small">
-            <el-radio-group v-model="form.resource">
-              <el-radio label="所有人"></el-radio>
-              <el-radio label="登录用户"></el-radio>
-              <el-radio label="用户组"></el-radio>
-              <el-radio label="禁止访问"></el-radio>
-            </el-radio-group>
+          <el-form-item label="备注" size="small">
+            <el-input placeholder="该模型的备注" v-model="form.name"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -104,10 +95,11 @@
           <el-form-item label="字段类型" size="small">
             <el-select v-model="form.type" placeholder="请选择字段类型">
               <el-option label="短文本(string)" value="string"></el-option>
-              <el-option label="富文本(string)" value="string"></el-option>
+              <el-option label="富文本(text)" value="string"></el-option>
               <el-option label="数字(number)" value="number"></el-option>
               <el-option label="布尔(boolean)" value="boolean"></el-option>
               <el-option label="日期(date)" value="date"></el-option>
+              <el-option label="文件(media)" value="date"></el-option>
               <el-option label="关联(pointer)" value="pointer"></el-option>
             </el-select>
           </el-form-item>

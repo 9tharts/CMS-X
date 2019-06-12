@@ -53,7 +53,10 @@
           <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>
       </el-submenu>-->
-
+      <el-menu-item index="3">
+        <i class="el-icon-picture"></i>
+        <span slot="title">文件</span>
+      </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-menu"></i>
         <span slot="title">应用</span>

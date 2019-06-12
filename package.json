@@ -24,5 +24,9 @@
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0"
+  },
+  "apidoc": {
+    "title": "Api 文档",
+    "url": "http://localhost:5000"
   }
 }
