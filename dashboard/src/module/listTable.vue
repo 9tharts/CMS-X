@@ -115,6 +115,7 @@ export default {
 }
 .l_table_th .key {
   font-size: 16px;
+  color: #3f536e;
 }
 </style>
 

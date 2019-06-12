@@ -18,7 +18,7 @@
         <div style="margin-left:auto;">
           <span class="f14 ml20">全部应用</span>
           <span class="inline_block ml20">
-            <el-select v-model="value" placeholder="HelloWorld">
+            <el-select v-model="value" placeholder="HelloWorld" size="small">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -45,7 +45,7 @@
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>EN-US</el-dropdown-item>
+              <el-dropdown-item>English</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -93,11 +93,11 @@ export default {
 <style>
 body {
   margin: 0;
-  background: #f7f7f7;
+  background: #f1f4f7;
 }
 .l_header {
   /* height: 70px; */
-  box-shadow: 0 0 8px 0 #c5d9e8;
+  /* box-shadow: 0 0 8px 0 #c5d9e8; */
   line-height: 60px;
   z-index: 10;
   position: absolute;
@@ -118,7 +118,7 @@ body {
   font-size: 14px;
 }
 .l_side_menu {
-  box-shadow: 0 0 8px 0 #c5d9e8;
+  /* box-shadow: 0 0 8px 0 #c5d9e8; */
   background: #fff;
 }
 .l_main_con {
@@ -182,5 +182,17 @@ th {
 }
 .f14 {
   font-size: 14px;
+}
+.el-button--primary {
+  color: #fff;
+  background: linear-gradient(315deg, #0097f6, #005eea) !important;
+  border-color: #2d7bf1 !important;
+}
+.el-table {
+  color: #3f536e !important;
+}
+.el-card {
+  box-shadow: none !important;
+  border: none !important;
 }
 </style>
