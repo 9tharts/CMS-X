@@ -3,20 +3,22 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-11
+ * @LastEditTime: 2019-06-12
  -->
 <template>
   <div>
     <el-row type="flex" :gutter="20">
-      <el-col :span="5">
-        <div>
+      <el-col :span="4">
+        <div class="mini_side">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>所有模型</span>
               <el-button @click="showAddModal" style="float: right; padding: 3px 0" type="text">添加</el-button>
             </div>
             <div>
-              <el-input size="medium" v-model="searchString" placeholder="搜索模型名称"></el-input>
+              <div style="padding:0 20px">
+                <el-input size="medium" v-model="searchString" placeholder="搜索模型名称"></el-input>
+              </div>
               <div class="module_list_con">
                 <el-menu
                   default-active="2"
@@ -39,19 +41,19 @@
           </el-card>
         </div>
       </el-col>
-      <el-col :span="19">
-        <div>
+      <el-col :span="20">
+        <div class>
           <el-card>
             <div slot="header" class="clearfix">
               <span>数据</span>
-              <el-button style="float: right; padding: 3px 10px" type="text">接口地址</el-button>
+              <el-button style="float: right; padding: 3px 10px" type="text">预览接口</el-button>
               <el-button style="float: right; padding: 3px 10px" type="text">查询</el-button>
               <el-button
                 @click="showAddRow"
                 style="float: right; padding: 3px 10px"
                 type="text"
-              >添加列(字段)</el-button>
-              <div style="margin-top:20px;">
+              >添加字段</el-button>
+              <div class="l_data_con" style="margin-top:20px;">
                 <ListTable></ListTable>
               </div>
             </div>
@@ -185,11 +187,17 @@ export default {
 }
 .module_list_con {
   margin-top: 20px;
+  height: 100vh;
 }
 .module_list_con .el-menu-item,
 .el-submenu__title {
   height: 40px !important;
   line-height: 40px !important;
+}
+</style>
+<style>
+.mini_side .el-card__body {
+  padding: 20px 0 !important;
 }
 </style>
 

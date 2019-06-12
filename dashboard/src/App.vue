@@ -3,17 +3,51 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-11
+ * @LastEditTime: 2019-06-12
  -->
 <template>
   <div id="app">
     <div class="l_main_con">
-      <header class="l_header">
+      <header class="l_header l_flex">
         <div class="logo">
           <a href="#">
             CMS-X
             <i style class="el-icon-s-grid"></i>
           </a>
+        </div>
+        <div style="margin-left:auto;">
+          <span class="f14 ml20">全部应用</span>
+          <span class="inline_block ml20">
+            <el-select v-model="value" placeholder="HelloWorld">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </span>
+          <!-- </div>
+          <div style="margin-left:auto">-->
+          <el-dropdown style="padding: 0 20px">
+            <span class="el-dropdown-link">
+              Admin
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>个人中心</el-dropdown-item>
+              <el-dropdown-item>退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+          <el-dropdown style="padding: 0 20px;">
+            <span class="el-dropdown-link" style="cursor:pointer">
+              简体中文
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>EN-US</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </header>
       <div class="l_main f_flex">
@@ -70,7 +104,7 @@ body {
   top: 0;
   width: 100%;
   background: #fff;
-  padding: 0 26px;
+  /* padding: 0 26px; */
 }
 .f_flex {
   display: flex;
@@ -94,9 +128,15 @@ body {
   padding-top: 60px;
 }
 
+.l_header .logo {
+  background: linear-gradient(100deg, #1c5de7, #1c91e7);
+  width: 150px;
+}
+
 .l_header .logo a {
-  color: #128bf8;
+  color: #fff;
   font-weight: bold;
+  padding-left: 20px;
   font-size: 20px;
   text-decoration: none;
 }
@@ -124,5 +164,23 @@ body {
 }
 .el-table__row {
   font-weight: normal !important;
+}
+.l_data_con {
+  height: calc(100vh + 36px);
+}
+th {
+  font-weight: normal;
+}
+.l_flex {
+  display: flex;
+}
+.inline_block {
+  display: inline-block;
+}
+.ml20 {
+  margin-left: 20px;
+}
+.f14 {
+  font-size: 14px;
 }
 </style>

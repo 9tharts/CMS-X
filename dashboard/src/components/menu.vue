@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-11
+ * @LastEditTime: 2019-06-12
  -->
 
 <template>
@@ -21,7 +21,7 @@
         <span slot="title">首页</span>
       </el-menu-item>
 
-      <el-submenu index="1">
+      <!-- <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-s-data"></i>
           <span>数据</span>
@@ -34,9 +34,16 @@
         <el-menu-item-group title="分组2">
           <el-menu-item index="1-3">选项3</el-menu-item>
         </el-menu-item-group>
-      </el-submenu>
-
-      <el-submenu index="10">
+      </el-submenu>-->
+      <el-menu-item index="module">
+        <i class="el-icon-s-help"></i>
+        <span slot="title">模型</span>
+      </el-menu-item>
+      <el-menu-item index="module">
+        <i class="el-icon-user-solid"></i>
+        <span slot="title">用户</span>
+      </el-menu-item>
+      <!-- <el-submenu index="10">
         <template slot="title">
           <i class="el-icon-user-solid"></i>
           <span>用户</span>
@@ -45,12 +52,8 @@
           <el-menu-item index="1-1">选项1</el-menu-item>
           <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>
-      </el-submenu>
+      </el-submenu>-->
 
-      <el-menu-item index="module">
-        <i class="el-icon-s-help"></i>
-        <span slot="title">模型</span>
-      </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-menu"></i>
         <span slot="title">应用</span>
@@ -77,9 +80,9 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    handleSelect(key,keyPath) {
-      console.log(key, keyPath)
-      this.$router.push('module')
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+      this.$router.push("module");
     }
   }
 };
@@ -90,7 +93,7 @@ export default {
   min-height: calc(100vh - 60px);
   min-width: 150px;
 }
-.el-menu{
+.el-menu {
   border-right: 0 !important;
 }
 .main_menu .el-menu {
@@ -116,20 +119,27 @@ export default {
   line-height: 50px !important;
   color: #3f536e !important;
 }
-.el-menu-item i, .el-submenu__title i{
+.el-menu-item i,
+.el-submenu__title i {
   color: #3f536e !important;
 }
-.el-menu-item.is-active, .el-menu-item:focus, .el-menu-item:hover {
-    color: #f5f5f5;
-    background: #f3f3f3 !important;
-    border-left: 2px solid #409eff;
-    font-weight: 700;
-    color: #a8c6df;
+.el-menu-item.is-active,
+.el-menu-item:focus,
+.el-menu-item:hover {
+  color: #f5f5f5;
+  background: #f3f3f3 !important;
+  border-left: 2px solid #409eff;
+  font-weight: 700;
+  color: #a8c6df;
 }
-.el-menu-item:focus, .el-menu-item:hover{
-   font-weight: 500 !important;
+.el-menu-item:focus,
+.el-menu-item:hover {
+  font-weight: 500 !important;
 }
-.el-menu-item{
-    border-left: 2px solid #fff;
+.el-menu-item {
+  border-left: 2px solid #fff;
+}
+.el-menu-item.is-active {
+  color: #409eff !important;
 }
 </style>
