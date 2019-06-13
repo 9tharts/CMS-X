@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-12
+ * @LastEditTime: 2019-06-13
  -->
 
 <template>
@@ -16,52 +16,31 @@
       :collapse="isCollapse"
       @select="handleSelect"
     >
-      <el-menu-item index="11">
+      <el-menu-item index="home">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页</span>
       </el-menu-item>
-
-      <!-- <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-s-data"></i>
-          <span>数据</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>-->
+      <el-menu-item index="data">
+        <i class="el-icon-s-data"></i>
+        <span slot="title">数据</span>
+      </el-menu-item>
       <el-menu-item index="module">
         <i class="el-icon-s-help"></i>
         <span slot="title">模型</span>
       </el-menu-item>
-      <el-menu-item index="module">
+      <el-menu-item index="user">
         <i class="el-icon-user-solid"></i>
         <span slot="title">用户</span>
       </el-menu-item>
-      <!-- <el-submenu index="10">
-        <template slot="title">
-          <i class="el-icon-user-solid"></i>
-          <span>用户</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>-->
-      <el-menu-item index="3">
+      <el-menu-item index="file">
         <i class="el-icon-picture"></i>
         <span slot="title">文件</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="application">
         <i class="el-icon-menu"></i>
         <span slot="title">应用</span>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="setting">
         <i class="el-icon-setting"></i>
         <span slot="title">设置</span>
       </el-menu-item>
@@ -77,15 +56,16 @@ export default {
     };
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
+    // handleOpen(key, keyPath) {
+    //   console.log(key, keyPath);
+    // },
+    // handleClose(key, keyPath) {
+    //   console.log(key, keyPath);
+    // },
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-      this.$router.push("module");
+      // console.log(key);
+
+      this.$router.push(key);
     }
   }
 };

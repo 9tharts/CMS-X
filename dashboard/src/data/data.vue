@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-13
+ * @LastEditTime: 2019-06-12
  -->
 <template>
   <div>
@@ -20,7 +20,12 @@
                 <el-input size="medium" v-model="searchString" placeholder="搜索模型名称"></el-input>
               </div>
               <div class="module_list_con">
-                <el-menu default-active="2" class="el-menu-vertical-demo">
+                <el-menu
+                  default-active="2"
+                  class="el-menu-vertical-demo"
+                  @open="handleOpen"
+                  @close="handleClose"
+                >
                   <el-menu-item index="2">
                     <span slot="title">模型1</span>
                   </el-menu-item>
@@ -40,9 +45,9 @@
         <div class>
           <el-card>
             <div slot="header" class="clearfix">
-              <span>模型结构</span>
-              <!-- <el-button style="float: right; padding: 3px 10px" type="text">预览接口</el-button>
-              <el-button style="float: right; padding: 3px 10px" type="text">查询</el-button>-->
+              <span>数据</span>
+              <el-button style="float: right; padding: 3px 10px" type="text">预览接口</el-button>
+              <el-button style="float: right; padding: 3px 10px" type="text">查询</el-button>
               <el-button
                 @click="showAddRow"
                 style="float: right; padding: 3px 10px"
