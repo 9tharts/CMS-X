@@ -1,7 +1,7 @@
 //TODO 动态切换
 const datasource = require('../model/datasource').mysql()
 
-const module = {
+const object = {
     /**
      * 查询模型
      * @param {int} appid 应用id
@@ -49,4 +49,4 @@ const module = {
     }
 }
 
-module.exports = module
+module.exports = object
