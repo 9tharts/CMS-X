@@ -3,26 +3,37 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-10
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-11
+ * @LastEditTime: 2019-06-13
  */
 
 const logger = require('koa-logger')
 const Koa = require('koa')
-const router = require('./router')
+const Router = require('koa-router');
+const routerList = require('./router/router')
 const config = require('./config/config')
 const static = require('koa-static')
+const bodyParser = require('koa-bodyparser')
 
 const app = new Koa()
+const router = new Router()
 
-// 访问 logger
+// bodyParser 中间件支持
+app.use(bodyParser())
+
+// logger 中间件
 app.use(logger((str, args) => {
   console.log(`Logger: ${str}`)
 }))
 
-// dashboard 访问支持
+// dashboard 静态访问支持
 app.use(static(__dirname + '/dashboard/dist'));
 
+routerList.forEach(item => {
+  router.use('/api', item.routes())
+});
+
 app.use(router.routes()).use(router.allowedMethods())
+
 const port = process.env.PORT || config.port
 
 app.listen(port, () => {
