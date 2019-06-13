@@ -1,3 +1,10 @@
+/*
+ * @description: 
+ * @Author: lucas@9thArts.com
+ * @Date: 2019-06-14
+ * @LastEditors: lucas@9thArts.com
+ * @LastEditTime: 2019-06-14
+ */
 const Sequelize = require('sequelize')
 //TODO 动态切换
 const datasource = require('../model/datasource').mysql()
@@ -5,7 +12,7 @@ const datasource = require('../model/datasource').mysql()
 const object = {
     /**
      * 查询模型
-     * @param {int} appid 应用id
+     * @param {Number} appid 应用id
      */
     async queryModel(appid) {
         return await datasource.query(`select TABLE_NAME as name,TABLE_COMMENT as comment from information_schema.tables WHERE table_schema='cms_${appid}' and table_type='base table'`, { type: Sequelize.QueryTypes.SELECT })
