@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-13
+ * @LastEditTime: 2019-06-14
  -->
 <template>
   <div>
@@ -60,19 +60,19 @@
     <!-- 添加模型 -->
     <el-dialog title="添加模型" :visible.sync="isShowAddModal" width="50%">
       <div>
-        <el-form ref="form" :model="form" label-width="70px" :inline="false">
+        <el-form ref="form" :model="module" label-width="70px" :inline="false">
           <el-form-item label="模型标识" size="small">
-            <el-input placeholder="英文开头+英文、数字" v-model="form.name"></el-input>
+            <el-input placeholder="英文开头+英文、数字" v-model="module.name"></el-input>
           </el-form-item>
           <el-form-item label="备注" size="small">
-            <el-input placeholder="该模型的备注" v-model="form.name"></el-input>
+            <el-input placeholder="该模型的备注" v-model="module.comment"></el-input>
           </el-form-item>
         </el-form>
       </div>
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="createModule">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -139,6 +139,7 @@
 
 <script>
 import ListTable from "./listTable";
+import request from "../../api/request";
 
 export default {
   name: "module",
@@ -150,12 +151,15 @@ export default {
       isShowAddModal: false,
       isShowAddRow: false,
       searchString: "",
-      form: {
+      module: {
         name: "",
-        other: [],
-        type: ""
-      }
+        comment: ""
+      },
+      form: {}
     };
+  },
+  mounted() {
+    this.getModuleList();
   },
   methods: {
     showAddModal() {
@@ -163,6 +167,16 @@ export default {
     },
     showAddRow() {
       this.isShowAddRow = true;
+    },
+    getModuleList() {
+      this.$axios.get("/module").then(res => {
+        console.log(res);
+      });
+    },
+    createModule() {
+      this.$axios.post("/module", this.module).then(res => {
+        console.log(res);
+      });
     }
   }
 };
