@@ -16,7 +16,8 @@ module.exports = status = {
    */
   s200(ctx, data) {
     ctx.status = 200
-    return data
+    ctx.body = data
+    return ctx
   },
 
   /**

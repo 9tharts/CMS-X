@@ -33,7 +33,12 @@ router.post('/module', async ctx => {
  * 通过 id 获取指定模型信息
  */
 router.get('/module/:moduleId', async ctx => {
-  console.log(ctx)
+  // console.log(ctx)
+  status.s200(ctx, {
+    id: 1,
+    name: 'hello',
+    des: 'hello'
+  })
 })
 
 /**
