@@ -6,5 +6,12 @@
  * @LastEditTime: 2019-06-10
  */
 module.exports = {
-  port: 5000
+  port: 5000,
+  mysql: {
+    database: 'test',
+    host: 'cdb-qtan4ef4.cd.tencentcdb.com',
+    port: 10042,
+    username: 'root',
+    password: '12@@@!sddsds!@'
+  }
 }
