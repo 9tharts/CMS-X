@@ -22,9 +22,11 @@ router.get('/module', async ctx => {
  * 创建新的模型
  */
 router.post('/module', async ctx => {
-  // const data = ctx
-  const data = ctx.request.body
-
+  const data = {
+    name: 'hello',
+    des: 'world'
+  }
+  ctx = status.s201(ctx, data)
 })
 
 /**
