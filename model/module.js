@@ -7,15 +7,17 @@
  */
 const Sequelize = require('sequelize')
 //TODO 动态切换
-const datasource = require('../model/datasource').mysql()
+const datasource = require('../model/datasource')
+const mysql = datasource.mysql()
+const mysqlErr = datasource.mysqlErr
 
-const object = {
+const instance = {
     /**
      * 查询模型
      * @param {Number} appid 应用id
      */
     async queryModel(appid) {
-        return await datasource.query(`select TABLE_NAME as name,TABLE_COMMENT as comment from information_schema.tables WHERE table_schema='cms_${appid}' and table_type='base table'`, { type: Sequelize.QueryTypes.SELECT })
+        return await mysql.query(`select TABLE_NAME as name,TABLE_COMMENT as comment from information_schema.tables WHERE table_schema='cms_${appid}' and table_type='base table'`, { type: Sequelize.QueryTypes.SELECT })
     },
 
     /**
@@ -25,12 +27,10 @@ const object = {
      * @param {String} comment 模型注释
      */
     async createModel(appid, name, comment) {
-        let sql = `create table cms_${appid}.${name} (id int comment 'id') comment '${comment}'`
-        try {
-            console.log(await datasource.query(sql))
-        } catch (error) {
-            console.log(error)
-        }
+        let sql = `create table cms_${appid}.${name} (id int not null AUTO_INCREMENT comment 'id', PRIMARY KEY (id)) comment '${comment}'`
+        await mysql.query(sql).catch(error => {
+            mysqlErr(error)
+        })
     },
 
     /**
@@ -39,7 +39,9 @@ const object = {
      * @param {String} name 模型名称
      */
     async removeModel(appid, name) {
-        datasource.query(`drop table cms_${appid}.${name}`)
+        await mysql.query(`drop table cms_${appid}.${name}`).catch(error => {
+            mysqlErr(error)
+        })
     },
 
     /**
@@ -50,10 +52,16 @@ const object = {
      * @param {String} comment 新模型注释
      */
     async alterModel(appid, targetName, subName, comment) {
+        try {
+            if(targetName != subName) {
+                await mysql.query(`rename table cms_${appid}.${targetName} to cms_${appid}.${subName}`)
+            }
+            await mysql.query(`alter table cms_${appid}.${subName} comment '${comment}'`)
+        } catch (error) {
+            mysqlErr(error)
+        }
         // fix me 如果这边只是改 comment ，前面一句改表名语句会提示重命名的已存在
-        datasource.query(`rename table cms_${appid}.${targetName} to cms_${appid}.${subName}`)
-        datasource.query(`alter table cms_${appid}.${subName} comment '${comment}'`)
     }
 }
 
-module.exports = object
+module.exports = instance
