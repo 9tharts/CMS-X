@@ -3,10 +3,15 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-10
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-11
+ * @LastEditTime: 2019-06-14
  -->
-# CMS-X
-A Headless CMS
+
+<div align=center><img width="150" height="60" src="https://raw.githubusercontent.com/9tharts/CMS-X/master/dashboard/public/logo_bg.png"/>
+
+<div>更简单易用的无头 CMS</div>
+</div>
+
+
 
  ### 安装 ###
  `npm i` 安装依赖 
