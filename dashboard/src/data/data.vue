@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-12
+ * @LastEditTime: 2019-06-14
  -->
 <template>
   <div>
@@ -52,7 +52,7 @@
                 @click="showAddRow"
                 style="float: right; padding: 3px 10px"
                 type="text"
-              >添加字段</el-button>
+              >添加数据</el-button>
               <div class="l_data_con" style="margin-top:20px;">
                 <ListTable></ListTable>
               </div>

@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-13
+ * @LastEditTime: 2019-06-14
  -->
 <template>
   <div>
@@ -34,6 +34,9 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="l_flex mt20" style="justify-content: space-between;">
+      <el-pagination background layout="prev, pager, next" :total="1000" style="margin-left:auto"></el-pagination>
+    </div>
   </div>
 </template>
 

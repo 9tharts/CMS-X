@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-12
+ * @LastEditTime: 2019-06-14
  -->
 <template>
   <div id="app">
@@ -187,6 +187,9 @@ th {
 }
 .ml20 {
   margin-left: 20px;
+}
+.mt20 {
+  margin-top: 20px;
 }
 .f14 {
   font-size: 14px;

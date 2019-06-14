@@ -139,7 +139,12 @@ export default {
         },
         [
           h("span", { class: "key" }, params.column.property),
-          h("span", { class: "label" }, params.column.label)
+          h("span", { class: "label" }, [
+            h("span", {}, params.column.label),
+            h("i", {
+              class: "el-icon-edit edit_column"
+            })
+          ])
         ]
       );
     }
@@ -163,6 +168,16 @@ export default {
 .column_table .el-tag {
   min-width: 80px !important;
   text-align: center;
+}
+.edit_column {
+  /* display: none; */
+  cursor: pointer;
+  width: 30px;
+  text-align: center;
+  color: #409eff;
+}
+.column_table .cell:hover .edit_column {
+  display: inline-block;
 }
 </style>
 
