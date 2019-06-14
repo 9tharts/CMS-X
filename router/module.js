@@ -15,10 +15,7 @@ const router = new Router()
  * 获取所有模型列表
  */
 router.get('/module', async ctx => {
-
   const res = await moduleModel.queryModel(1)
-
-  // console.log(ctx.request.body)
   ctx.body = status.s200(res)
 })
 
@@ -26,12 +23,7 @@ router.get('/module', async ctx => {
  * 创建新的模型
  */
 router.post('/module', async ctx => {
-  // const data = {
-  //   name: 'hello',
-  //   des: 'world'
-  // }
   const res = await moduleModel.createModel(1, ctx.request.body.name, ctx.request.body.comment)
-
   ctx = status.s201(ctx, res)
 })
 
@@ -50,8 +42,15 @@ router.get('/module/:moduleId', async ctx => {
 /**
  * 更新全部模型信息
  */
-router.put('/module/:moduleId', ctx => {
-  console.log(ctx)
+router.put('/module/:moduleId', async ctx => {
+  // console.log(ctx.request.body)
+  // 开始校验参数
+  if (ctx.request.body.subName == '' || ctx.request.body.comment == '' || typeof ctx.request.body.subName == 'undefined' || typeof ctx.request.body.comment == 'undefined') {
+    status.s400(ctx, '', '参数错误')
+    return
+  }
+  const res = await moduleModel.alterModel(1, ctx.params.moduleId, ctx.request.body.subName, ctx.request.body.comment)
+  console.log(res)
 })
 
 /**
