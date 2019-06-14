@@ -50,6 +50,7 @@ const object = {
      * @param {String} comment 新模型注释
      */
     async alterModel(appid, targetName, subName, comment) {
+        // fix me 如果这边只是改 comment ，前面一句改表名语句会提示重命名的已存在
         datasource.query(`rename table cms_${appid}.${targetName} to cms_${appid}.${subName}`)
         datasource.query(`alter table cms_${appid}.${subName} comment '${comment}'`)
     }
