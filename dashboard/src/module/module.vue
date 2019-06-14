@@ -3,7 +3,7 @@
  * @Author: lucas@9thArts.com
  * @Date: 2019-06-11
  * @LastEditors: lucas@9thArts.com
- * @LastEditTime: 2019-06-14
+ * @LastEditTime: 2019-06-15
  -->
 <template>
   <div>
@@ -21,6 +21,7 @@
               </div>
               <div class="module_list_con">
                 <el-menu
+                  ref="moduleMenu"
                   :default-active="currentSelectedModuleName"
                   class="el-menu-vertical-demo"
                   @select="moduleSelected"
@@ -36,7 +37,7 @@
                             style="color:#409eff !important"
                           ></i>
                           <i
-                            @click="deleteModule"
+                            @click="deleteModule(module)"
                             class="el-icon-delete"
                             style="color:#f56c6c !important"
                           ></i>
@@ -79,12 +80,18 @@
       width="50%"
     >
       <div>
-        <el-form ref="form" :model="module" label-width="70px" :inline="false">
-          <el-form-item label="模型标识" size="small">
-            <el-input placeholder="英文开头+英文、数字" v-model="module.name"></el-input>
+        <el-form
+          ref="moduleForm"
+          :model="module"
+          :rules="moduleRules"
+          label-width="90px"
+          :inline="false"
+        >
+          <el-form-item label="模型标识" size="small" prop="name">
+            <el-input placeholder="英文开头+英文、数字，如article" v-model="module.name"></el-input>
           </el-form-item>
-          <el-form-item label="备注" size="small">
-            <el-input placeholder="该模型的备注" v-model="module.comment"></el-input>
+          <el-form-item label="备注名称" size="small" prop="comment">
+            <el-input placeholder="该模型的备注，如文章" v-model="module.comment"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -154,6 +161,9 @@
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
+
+    <!-- 删除弹框 -->
+    <!-- isSHowDeleteModal -->
   </div>
 </template>
 
@@ -167,14 +177,38 @@ export default {
     ListTable
   },
   data() {
+    var validateString = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("模型标识不能为空"));
+      } else if (!/^[a-z]*$/.test(value.substr(0, 1))) {
+        return callback(new Error("必须以字母开头"));
+      } else {
+        callback();
+        return true;
+      }
+    };
     return {
       isShowAddModal: false,
       isShowAddRow: false,
+      isSHowDeleteModal: false,
       addModuleMode: "add",
       searchString: "",
       module: {
         name: "",
         comment: ""
+      },
+      moduleRules: {
+        name: [
+          {
+            required: true,
+            validator: validateString,
+            trigger: "blur"
+          }
+        ],
+        comment: [
+          { required: true, message: "请输入模型备注名称", trigger: "blur" },
+          { min: 2, message: "长度大于2个字符", trigger: "blur" }
+        ]
       },
       moduleList: [],
       currentSelectedModuleName: "",
@@ -182,7 +216,7 @@ export default {
     };
   },
   mounted() {
-    this.getModuleList();
+    this.getModuleList(true);
   },
   methods: {
     showAddModal() {
@@ -198,46 +232,55 @@ export default {
       this.getColumnByName(name);
       this.currentSelectedModuleName = name;
     },
-    getModuleList() {
+    getModuleList(firstTime) {
       this.$axios.get("/module").then(res => {
         const firstName = res.data[0].name;
         this.moduleList = res.data;
-
-        this.currentSelectedModuleName = firstName;
+        firstTime ? (this.currentSelectedModuleName = firstName) : "";
         this.getColumnByName(firstName);
       });
     },
     createModule() {
       if (this.addModuleMode == "add") {
-        this.$axios.post("/module", this.module).then(res => {
-          console.log(res);
-          this.getModuleList();
-          if (res.status == 201) {
-            this.isShowAddModal = false;
-            this.$message({
-              message: "添加成功",
-              type: "success"
+        this.$refs["moduleForm"].validate(valid => {
+          if (valid) {
+            this.$axios.post("/module", this.module).then(res => {
+              this.getModuleList();
+              if (res.status == 201) {
+                this.isShowAddModal = false;
+                // this.currentSelectedModuleName = this.module.name;
+                this.$refs.moduleMenu.activeIndex = this.module.name;
+                this.$message({
+                  message: "添加成功",
+                  type: "success"
+                });
+              }
             });
           }
         });
       }
       if (this.addModuleMode == "edit") {
-        this.$axios
-          .put("/module/" + this.targetName, {
-            subName: this.module.name,
-            comment: this.module.comment
-          })
-          .then(res => {
-            console.log(res);
-            this.getModuleList();
-            // if (res.status == 201) {
-            //   this.isShowAddModal = false;
-            //   this.$message({
-            //     message: "添加成功",
-            //     type: "success"
-            //   });
-            // }
-          });
+        this.$refs["moduleForm"].validate(valid => {
+          if (valid) {
+            this.$axios
+              .put("/module/" + this.targetName, {
+                subName: this.module.name,
+                comment: this.module.comment
+              })
+              .then(res => {
+                console.log(res);
+                this.getModuleList();
+                if (res.status == 204) {
+                  this.isShowAddModal = false;
+                  this.$refs.moduleMenu.activeIndex = this.module.name;
+                  this.$message({
+                    message: "编辑成功",
+                    type: "success"
+                  });
+                }
+              });
+          }
+        });
       }
     },
     editModule(module) {
@@ -248,8 +291,49 @@ export default {
       this.targetName = module.name;
     },
 
-    deleteModule() {},
-    getColumnByName(name) {}
+    deleteModule(module) {
+      this.targetName = module.name;
+      this.$confirm("此操作将永久删除该模型及字段、数据等, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$axios
+            .delete("/module/" + this.targetName, {
+              subName: this.module.name,
+              comment: this.module.comment
+            })
+            .then(res => {
+              this.getModuleList(true);
+              if (res.status == 204) {
+                this.isShowAddModal = false;
+                this.$message({
+                  message: "添加成功",
+                  type: "success"
+                });
+              }
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+    },
+    getColumnByName(name) {},
+
+    validateModuleForm() {
+      this.$refs["moduleForm"].validate(valid => {
+        if (valid) {
+          debugger;
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
   }
 };
 </script>
