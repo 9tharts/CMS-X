@@ -10,9 +10,13 @@
     <div class="l_main_con">
       <header class="l_header l_flex">
         <div class="logo">
-          <a href="#">
-            CMS-X
-            <i style class="el-icon-s-grid"></i>
+          <a
+            href="#"
+            style="display:block;width:150px; height:60px; padding:10px;box-sizing:border-box;"
+          >
+            <!-- CMS-X
+            <i style class="el-icon-s-grid"></i>-->
+            <img :src="require('@/assets/logo.png')" style="display:block;width:85%;">
           </a>
         </div>
         <div style="margin-left:auto;">
